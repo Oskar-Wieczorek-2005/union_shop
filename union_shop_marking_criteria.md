@@ -26,17 +26,6 @@
 | Cart Management | Full cart functionality including quantity editing/removal, price calculations and persistence | 6% | [Cart](https://shop.upsu.net/cart) |
 | Search System | Complete search functionality (search buttons should function on the navbar and the footer) | 4% | [Search](https://shop.upsu.net/search) |
 
-## Additional Considerations
-
-### Bonus Features (Not required but can earn extra credit)
-- Pagination on collection pages
-- Social sharing buttons
-- Email newsletter signup
-- Size guide functionality
-- Order notes in cart
-- Mobile hamburger menu
-- Cart badge with item count
-
 ### Technical Implementation Notes
 - Focus on functionality over visual design
 - External integrations (Shopify auth, payment systems) not required
@@ -50,10 +39,3 @@
 **Dummy data** = Data that is often hardcoded or (AI) generated for display or testing purposes. It's not meant to represent real-world data stored in your services.
 
 **Responsive** = Design that adapts to different screen sizes for example different layouts on mobile and desktop targets. For the purpose of this coursework, you are primarily developing a web application on mobile view.
-
-### Mark Distribution Summary
-- **Basic (40%)**: Essential pages, navigation, static content (hardcoded data* acceptable)
-- **Intermediate (35%)**: Core e-commerce UI and dynamic content from data models/services
-- **Advanced (25%)**: Complete systems with full functionality and data management
-
-**Total: 100%**
