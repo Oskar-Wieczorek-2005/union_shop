@@ -19,6 +19,38 @@ class Product {
   });
 }
 
+//Hard coded products list
+final List<Product> products = [
+  Product(
+    title: 'Landyard',
+    price: '£10.00',
+    imageUrl:
+        'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+    description: 'High-quality lanyard, perfect for keys or ID cards.',
+  ),
+  Product(
+    title: 'I Heart Portsmouth Mug',
+    price: '£15.00',
+    imageUrl:
+        'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+    description: 'Ceramic mug celebrating Portsmouth.',
+  ),
+  Product(
+    title: 'Portsmouth University Shirt',
+    price: '£20.00',
+    imageUrl:
+        'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+    description: 'Comfortable shirt with Portsmouth University logo.',
+  ),
+  Product(
+    title: 'Portsmouth University Hoodie',
+    price: '£25.00',
+    imageUrl:
+        'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+    description: 'Warm hoodie with Portsmouth University branding.',
+  ),
+];
+
 class UnionShopApp extends StatelessWidget {
   const UnionShopApp({super.key});
 
