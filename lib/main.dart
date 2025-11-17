@@ -5,6 +5,20 @@ void main() {
   runApp(const UnionShopApp());
 }
 
+class Product {
+  final String title;
+  final String price;
+  final String imageUrl;
+  final String description;
+
+  Product({
+    required this.title,
+    required this.price,
+    required this.imageUrl,
+    required this.description,
+  });
+}
+
 class UnionShopApp extends StatelessWidget {
   const UnionShopApp({super.key});
 
