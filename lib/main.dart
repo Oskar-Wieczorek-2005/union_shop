@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:union_shop/product_page.dart';
+import 'product_page.dart';
 
 void main() {
   runApp(const UnionShopApp());
@@ -22,7 +22,7 @@ class Product {
 // Hard coded products list
 final List<Product> products = [
   Product(
-    title: 'Landyard',
+    title: 'Lanyard',
     price: '£10.00',
     imageUrl:
         'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
@@ -64,7 +64,6 @@ class UnionShopApp extends StatelessWidget {
       ),
       home: const HomeScreen(),
       initialRoute: '/',
-      // When navigating to '/product', pass the Product as an argument
       routes: {'/product': (context) => const ProductPage()},
     );
   }
@@ -218,9 +217,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.black.withValues(alpha: 0.7),
-                        ),
+                        color: Colors.black.withOpacity(0.7),
                       ),
                     ),
                   ),
@@ -318,57 +315,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
 
-            // Footer
-            Container(
-              width: double.infinity,
-              color: const Color(0xFF4d2963),
-              padding: const EdgeInsets.all(24),
-              child: const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Union Shop',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    '© 2025 Union Shop. All rights reserved.',
-                    style: TextStyle(
-                      color: Colors.white70,
-                      fontSize: 14,
-                    ),
-                  ),
-                  SizedBox(height: 16),
-                  Row(
-                    children: [
-                      Text(
-                        'Home',
-                        style: TextStyle(color: Colors.white, fontSize: 14),
-                      ),
-                      SizedBox(width: 16),
-                      Text(
-                        'Products',
-                        style: TextStyle(color: Colors.white, fontSize: 14),
-                      ),
-                      SizedBox(width: 16),
-                      Text(
-                        'About',
-                        style: TextStyle(color: Colors.white, fontSize: 14),
-                      ),
-                      SizedBox(width: 16),
-                      Text(
-                        'Contact',
-                        style: TextStyle(color: Colors.white, fontSize: 14),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+            const Footer(),
           ],
         ),
       ),
@@ -424,6 +371,65 @@ class ProductCard extends StatelessWidget {
               Text(
                 price,
                 style: const TextStyle(fontSize: 13, color: Colors.grey),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Reusable Footer Widget
+class Footer extends StatelessWidget {
+  const Footer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      color: const Color(0xFF4d2963),
+      padding: const EdgeInsets.all(24),
+      child: const Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Union Shop',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 8),
+          Text(
+            '© 2025 Union Shop. All rights reserved.',
+            style: TextStyle(
+              color: Colors.white70,
+              fontSize: 14,
+            ),
+          ),
+          SizedBox(height: 16),
+          Row(
+            children: [
+              Text(
+                'Home',
+                style: TextStyle(color: Colors.white, fontSize: 14),
+              ),
+              SizedBox(width: 16),
+              Text(
+                'Products',
+                style: TextStyle(color: Colors.white, fontSize: 14),
+              ),
+              SizedBox(width: 16),
+              Text(
+                'About',
+                style: TextStyle(color: Colors.white, fontSize: 14),
+              ),
+              SizedBox(width: 16),
+              Text(
+                'Contact',
+                style: TextStyle(color: Colors.white, fontSize: 14),
               ),
             ],
           ),
