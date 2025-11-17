@@ -288,7 +288,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
 
-            // Footer
+// Footer
             Container(
               width: double.infinity,
               color: const Color(0xFF4d2963),
@@ -311,6 +311,30 @@ class HomeScreen extends StatelessWidget {
                       color: Colors.white70,
                       fontSize: 14,
                     ),
+                  ),
+                  SizedBox(height: 16),
+                  Row(
+                    children: [
+                      Text(
+                        'Home',
+                        style: TextStyle(color: Colors.white, fontSize: 14),
+                      ),
+                      SizedBox(width: 16),
+                      Text(
+                        'Products',
+                        style: TextStyle(color: Colors.white, fontSize: 14),
+                      ),
+                      SizedBox(width: 16),
+                      Text(
+                        'About',
+                        style: TextStyle(color: Colors.white, fontSize: 14),
+                      ),
+                      SizedBox(width: 16),
+                      Text(
+                        'Contact',
+                        style: TextStyle(color: Colors.white, fontSize: 14),
+                      ),
+                    ],
                   ),
                 ],
               ),
