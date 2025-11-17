@@ -97,6 +97,7 @@ class ProductPage extends StatelessWidget {
                                   ),
                                   onPressed: placeholderCallbackForButtons,
                                 ),
+                                // Cart icon (will later open cart page)
                                 IconButton(
                                   icon: const Icon(
                                     Icons.shopping_bag_outlined,
@@ -201,6 +202,28 @@ class ProductPage extends StatelessWidget {
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                       color: Color(0xFF4d2963),
+                    ),
+                  ),
+
+                  const SizedBox(height: 16),
+
+                  // ADD TO CART BUTTON
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF4d2963),
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                      ),
+                      onPressed: placeholderCallbackForButtons,
+                      child: const Text(
+                        'ADD TO CART',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ),
 
