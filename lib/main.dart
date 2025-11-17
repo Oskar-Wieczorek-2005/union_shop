@@ -26,6 +26,20 @@ class UnionShopApp extends StatelessWidget {
   }
 }
 
+class Product {
+  final String title;
+  final String price;
+  final String imageUrl;
+  final String description;
+
+  Product({
+    required this.title,
+    required this.price,
+    required this.imageUrl,
+    required this.description,
+  });
+}
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
