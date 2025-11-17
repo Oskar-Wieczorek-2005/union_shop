@@ -1,6 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/product_page.dart';
 
+// Step 1: Define Product class
+class Product {
+  final String title;
+  final String price;
+  final String imageUrl;
+  final String description;
+
+  Product({
+    required this.title,
+    required this.price,
+    required this.imageUrl,
+    required this.description,
+  });
+}
+
+// Example product list
+final List<Product> products = [
+  Product(
+    title: 'Landyard',
+    price: '£10.00',
+    imageUrl:
+        'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+    description: 'High-quality lanyard, perfect for keys or ID cards.',
+  ),
+  Product(
+    title: 'I Heart Portsmouth Mug',
+    price: '£15.00',
+    imageUrl:
+        'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+    description: 'Ceramic mug celebrating Portsmouth.',
+  ),
+  Product(
+    title: 'Portsmouth University Shirt',
+    price: '£20.00',
+    imageUrl:
+        'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+    description: 'Comfortable shirt with Portsmouth University logo.',
+  ),
+  Product(
+    title: 'Portsmouth University Hoodie',
+    price: '£25.00',
+    imageUrl:
+        'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+    description: 'Warm hoodie with Portsmouth University branding.',
+  ),
+];
+
 void main() {
   runApp(const UnionShopApp());
 }
@@ -17,27 +64,10 @@ class UnionShopApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF4d2963)),
       ),
       home: const HomeScreen(),
-      // By default, the app starts at the '/' route, which is the HomeScreen
       initialRoute: '/',
-      // When navigating to '/product', build and return the ProductPage
-      // In your browser, try this link: http://localhost:49856/#/product
       routes: {'/product': (context) => const ProductPage()},
     );
   }
-}
-
-class Product {
-  final String title;
-  final String price;
-  final String imageUrl;
-  final String description;
-
-  Product({
-    required this.title,
-    required this.price,
-    required this.imageUrl,
-    required this.description,
-  });
 }
 
 class HomeScreen extends StatelessWidget {
@@ -47,12 +77,8 @@ class HomeScreen extends StatelessWidget {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
   }
 
-  void navigateToProduct(BuildContext context) {
-    Navigator.pushNamed(context, '/product');
-  }
-
   void placeholderCallbackForButtons() {
-    // This is the event handler for buttons that don't work yet
+    // Placeholder for unimplemented buttons
   }
 
   @override
@@ -180,7 +206,6 @@ class HomeScreen extends StatelessWidget {
               width: double.infinity,
               child: Stack(
                 children: [
-                  // Background image
                   Positioned.fill(
                     child: Container(
                       decoration: const BoxDecoration(
@@ -192,13 +217,10 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.black.withValues(alpha: 0.7),
-                        ),
+                        color: Colors.black.withOpacity(0.7),
                       ),
                     ),
                   ),
-                  // Content overlay
                   Positioned(
                     left: 24,
                     right: 24,
@@ -263,6 +285,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 48),
+                    // Step 2: Dynamic GridView with navigation
                     GridView.count(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
@@ -270,39 +293,22 @@ class HomeScreen extends StatelessWidget {
                           MediaQuery.of(context).size.width > 600 ? 2 : 1,
                       crossAxisSpacing: 24,
                       mainAxisSpacing: 48,
-                      children: const [
-                        ProductCard(
-                          title: 'Landyard',
-                          price: '£10.00',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                        ),
-                        ProductCard(
-                          title: 'I Heart Portsmouth Mug',
-                          price: '£15.00',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                        ),
-                        ProductCard(
-                          title: 'Portsmouth Univercity Shirt',
-                          price: '£20.00',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                        ),
-                        ProductCard(
-                          title: 'Portsmouth Univercity Hoodie',
-                          price: '£25.00',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                        ),
-                      ],
+                      children: products.map((product) {
+                        return ProductCard(
+                          product: product,
+                          onTap: () {
+                            Navigator.pushNamed(context, '/product',
+                                arguments: product);
+                          },
+                        );
+                      }).toList(),
                     ),
                   ],
                 ),
               ),
             ),
 
-// Footer
+            // Footer
             Container(
               width: double.infinity,
               color: const Color(0xFF4d2963),
@@ -329,25 +335,17 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(height: 16),
                   Row(
                     children: [
-                      Text(
-                        'Home',
-                        style: TextStyle(color: Colors.white, fontSize: 14),
-                      ),
+                      Text('Home',
+                          style: TextStyle(color: Colors.white, fontSize: 14)),
                       SizedBox(width: 16),
-                      Text(
-                        'Products',
-                        style: TextStyle(color: Colors.white, fontSize: 14),
-                      ),
+                      Text('Products',
+                          style: TextStyle(color: Colors.white, fontSize: 14)),
                       SizedBox(width: 16),
-                      Text(
-                        'About',
-                        style: TextStyle(color: Colors.white, fontSize: 14),
-                      ),
+                      Text('About',
+                          style: TextStyle(color: Colors.white, fontSize: 14)),
                       SizedBox(width: 16),
-                      Text(
-                        'Contact',
-                        style: TextStyle(color: Colors.white, fontSize: 14),
-                      ),
+                      Text('Contact',
+                          style: TextStyle(color: Colors.white, fontSize: 14)),
                     ],
                   ),
                 ],
@@ -360,30 +358,23 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
+// Updated ProductCard class
 class ProductCard extends StatelessWidget {
-  final String title;
-  final String price;
-  final String imageUrl;
+  final Product product;
+  final VoidCallback onTap;
 
-  const ProductCard({
-    super.key,
-    required this.title,
-    required this.price,
-    required this.imageUrl,
-  });
+  const ProductCard({super.key, required this.product, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, '/product');
-      },
+      onTap: onTap,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             child: Image.network(
-              imageUrl,
+              product.imageUrl,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) {
                 return Container(
@@ -399,16 +390,12 @@ class ProductCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 4),
-              Text(
-                title,
-                style: const TextStyle(fontSize: 14, color: Colors.black),
-                maxLines: 2,
-              ),
+              Text(product.title,
+                  style: const TextStyle(fontSize: 14, color: Colors.black),
+                  maxLines: 2),
               const SizedBox(height: 4),
-              Text(
-                price,
-                style: const TextStyle(fontSize: 13, color: Colors.grey),
-              ),
+              Text(product.price,
+                  style: const TextStyle(fontSize: 13, color: Colors.grey)),
             ],
           ),
         ],
