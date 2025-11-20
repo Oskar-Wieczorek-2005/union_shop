@@ -131,8 +131,7 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                           const Spacer(),
-                          ConstrainedBox(
-                            constraints: const BoxConstraints(maxWidth: 600),
+                          Expanded(
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
@@ -175,54 +174,60 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                   onPressed: placeholderCallbackForButtons,
                                 ),
-                                PopupMenuButton<String>(
-                                  icon: const Icon(
-                                    Icons.menu,
-                                    size: 18,
-                                    color: Colors.grey,
+                                // Minimal dropdown change: full width, drop down from header
+                                Expanded(
+                                  child: PopupMenuButton<String>(
+                                    icon: const Icon(
+                                      Icons.menu,
+                                      size: 18,
+                                      color: Colors.grey,
+                                    ),
+                                    constraints: BoxConstraints(
+                                      minWidth:
+                                          MediaQuery.of(context).size.width,
+                                    ),
+                                    onSelected: (value) {
+                                      switch (value) {
+                                        case 'Home':
+                                          navigateToHome(context);
+                                          break;
+                                        case 'Products':
+                                          placeholderCallbackForButtons();
+                                          break;
+                                        case 'The Print Shack':
+                                          placeholderCallbackForButtons();
+                                          break;
+                                        case 'SALE':
+                                          placeholderCallbackForButtons();
+                                          break;
+                                        case 'About':
+                                          placeholderCallbackForButtons();
+                                          break;
+                                      }
+                                    },
+                                    itemBuilder: (context) => [
+                                      const PopupMenuItem(
+                                        value: 'Home',
+                                        child: Text('Home'),
+                                      ),
+                                      const PopupMenuItem(
+                                        value: 'Shop',
+                                        child: Text('Shop'),
+                                      ),
+                                      const PopupMenuItem(
+                                        value: 'The Print Shack',
+                                        child: Text('The Print Shack'),
+                                      ),
+                                      const PopupMenuItem(
+                                        value: 'SALE',
+                                        child: Text('SALE'),
+                                      ),
+                                      const PopupMenuItem(
+                                        value: 'About',
+                                        child: Text('About'),
+                                      ),
+                                    ],
                                   ),
-                                  onSelected: (value) {
-                                    // Handle menu item selection
-                                    switch (value) {
-                                      case 'Home':
-                                        navigateToHome(context);
-                                        break;
-                                      case 'Products':
-                                        placeholderCallbackForButtons();
-                                        break;
-                                      case 'The Print Shack':
-                                        placeholderCallbackForButtons();
-                                        break;
-                                      case 'SALE':
-                                        placeholderCallbackForButtons();
-                                        break;
-                                      case 'About':
-                                        placeholderCallbackForButtons();
-                                        break;
-                                    }
-                                  },
-                                  itemBuilder: (context) => [
-                                    const PopupMenuItem(
-                                      value: 'Home',
-                                      child: Text('Home'),
-                                    ),
-                                    const PopupMenuItem(
-                                      value: 'Shop',
-                                      child: Text('Shop'),
-                                    ),
-                                    const PopupMenuItem(
-                                      value: 'The Print Shack',
-                                      child: Text('The Print Shack'),
-                                    ),
-                                    const PopupMenuItem(
-                                      value: 'SALE',
-                                      child: Text('SALE'),
-                                    ),
-                                    const PopupMenuItem(
-                                      value: 'About',
-                                      child: Text('About'),
-                                    ),
-                                  ],
                                 ),
                               ],
                             ),
