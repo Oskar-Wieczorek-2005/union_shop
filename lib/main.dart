@@ -175,18 +175,54 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                   onPressed: placeholderCallbackForButtons,
                                 ),
-                                IconButton(
+                                PopupMenuButton<String>(
                                   icon: const Icon(
                                     Icons.menu,
                                     size: 18,
                                     color: Colors.grey,
                                   ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
-                                  onPressed: placeholderCallbackForButtons,
+                                  onSelected: (value) {
+                                    // Handle menu item selection
+                                    switch (value) {
+                                      case 'Home':
+                                        navigateToHome(context);
+                                        break;
+                                      case 'Products':
+                                        placeholderCallbackForButtons();
+                                        break;
+                                      case 'The Print Shack':
+                                        placeholderCallbackForButtons();
+                                        break;
+                                      case 'SALE':
+                                        placeholderCallbackForButtons();
+                                        break;
+                                      case 'About':
+                                        placeholderCallbackForButtons();
+                                        break;
+                                    }
+                                  },
+                                  itemBuilder: (context) => [
+                                    const PopupMenuItem(
+                                      value: 'Home',
+                                      child: Text('Home'),
+                                    ),
+                                    const PopupMenuItem(
+                                      value: 'Shop',
+                                      child: Text('Shop'),
+                                    ),
+                                    const PopupMenuItem(
+                                      value: 'The Print Shack',
+                                      child: Text('The Print Shack'),
+                                    ),
+                                    const PopupMenuItem(
+                                      value: 'SALE',
+                                      child: Text('SALE'),
+                                    ),
+                                    const PopupMenuItem(
+                                      value: 'About',
+                                      child: Text('About'),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
