@@ -452,6 +452,7 @@ class Footer extends StatelessWidget {
       color: const Color(0xFF4d2963),
       padding: const EdgeInsets.all(24),
       child: const Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
