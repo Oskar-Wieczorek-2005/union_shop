@@ -174,12 +174,11 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                   onPressed: placeholderCallbackForButtons,
                                 ),
-                                // Minimal dropdown change: full width, drop down from header
                                 Expanded(
                                   child: PopupMenuButton<String>(
                                     icon: const Icon(
                                       Icons.menu,
-                                      size: 18,
+                                      size: 12,
                                       color: Colors.grey,
                                     ),
                                     constraints: BoxConstraints(
