@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'product_page.dart';
+import 'about_page.dart';
 
 void main() {
   runApp(const UnionShopApp());
@@ -64,7 +65,10 @@ class UnionShopApp extends StatelessWidget {
       ),
       home: const HomeScreen(),
       initialRoute: '/',
-      routes: {'/product': (context) => const ProductPage()},
+      routes: {
+        '/product': (context) => const ProductPage(),
+        '/about': (context) => const AboutPage(),
+      },
     );
   }
 }
@@ -396,7 +400,7 @@ class Header extends StatelessWidget {
                                   onPlaceholderTap();
                                   break;
                                 case 'About':
-                                  onPlaceholderTap();
+                                  Navigator.pushNamed(context, '/about');
                                   break;
                               }
                             },
