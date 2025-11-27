@@ -278,7 +278,7 @@ class ProductCard extends StatelessWidget {
 }
 
 /// Reusable Header Widget
-class Header extends StatelessWidget {
+class Header extends StatefulWidget {
   final VoidCallback onHomeTap;
   final VoidCallback onPlaceholderTap;
 
@@ -287,6 +287,76 @@ class Header extends StatelessWidget {
     required this.onHomeTap,
     required this.onPlaceholderTap,
   });
+
+  @override
+  State<Header> createState() => _HeaderState();
+}
+
+class _HeaderState extends State<Header> {
+  final GlobalKey _menuKey = GlobalKey();
+
+  Future<void> _showShopSubmenu() async {
+    final BuildContext keyContext = _menuKey.currentContext!;
+    final RenderBox box = keyContext.findRenderObject() as RenderBox;
+    final Offset position = box.localToGlobal(Offset.zero);
+    final Size size = box.size;
+    final RelativeRect rect = RelativeRect.fromLTRB(
+      position.dx,
+      position.dy + size.height,
+      position.dx + size.width,
+      position.dy,
+    );
+
+    const List<String> submenuLabels = [
+      'Option One',
+      'Option Two',
+      'Option Three',
+      'Option Four',
+      'Option Five',
+      'Option Six',
+      'Option Seven',
+    ];
+
+    await showMenu<String>(
+      context: keyContext,
+      position: rect,
+      items: submenuLabels.map((label) {
+        return PopupMenuItem<String>(
+          value: label,
+          child: Text(label),
+        );
+      }).toList(),
+    );
+  }
+
+  Future<void> _showPrintShackSubmenu() async {
+    final BuildContext keyContext = _menuKey.currentContext!;
+    final RenderBox box = keyContext.findRenderObject() as RenderBox;
+    final Offset position = box.localToGlobal(Offset.zero);
+    final Size size = box.size;
+    final RelativeRect rect = RelativeRect.fromLTRB(
+      position.dx,
+      position.dy + size.height,
+      position.dx + size.width,
+      position.dy,
+    );
+
+    const List<String> printShackLabels = [
+      'Option 1',
+      'Option 2',
+    ];
+
+    await showMenu<String>(
+      context: keyContext,
+      position: rect,
+      items: printShackLabels.map((label) {
+        return PopupMenuItem<String>(
+          value: label,
+          child: Text(label),
+        );
+      }).toList(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -313,7 +383,7 @@ class Header extends StatelessWidget {
               child: Row(
                 children: [
                   GestureDetector(
-                    onTap: onHomeTap,
+                    onTap: widget.onHomeTap,
                     child: Image.network(
                       'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
                       height: 18,
@@ -347,7 +417,7 @@ class Header extends StatelessWidget {
                             minWidth: 32,
                             minHeight: 32,
                           ),
-                          onPressed: onPlaceholderTap,
+                          onPressed: widget.onPlaceholderTap,
                         ),
                         IconButton(
                           icon: const Icon(
@@ -360,7 +430,7 @@ class Header extends StatelessWidget {
                             minWidth: 32,
                             minHeight: 32,
                           ),
-                          onPressed: onPlaceholderTap,
+                          onPressed: widget.onPlaceholderTap,
                         ),
                         IconButton(
                           icon: const Icon(
@@ -373,10 +443,11 @@ class Header extends StatelessWidget {
                             minWidth: 32,
                             minHeight: 32,
                           ),
-                          onPressed: onPlaceholderTap,
+                          onPressed: widget.onPlaceholderTap,
                         ),
                         Expanded(
                           child: PopupMenuButton<String>(
+                            key: _menuKey,
                             icon: const Icon(
                               Icons.menu,
                               size: 12,
@@ -388,16 +459,16 @@ class Header extends StatelessWidget {
                             onSelected: (value) {
                               switch (value) {
                                 case 'Home':
-                                  onHomeTap();
+                                  widget.onHomeTap();
                                   break;
-                                case 'Products':
-                                  onPlaceholderTap();
+                                case 'Shop':
+                                  _showShopSubmenu();
                                   break;
                                 case 'The Print Shack':
-                                  onPlaceholderTap();
+                                  _showPrintShackSubmenu();
                                   break;
                                 case 'SALE':
-                                  onPlaceholderTap();
+                                  widget.onPlaceholderTap();
                                   break;
                                 case 'About':
                                   Navigator.pushNamed(context, '/about');
