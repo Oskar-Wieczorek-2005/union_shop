@@ -295,67 +295,89 @@ class Header extends StatefulWidget {
 class _HeaderState extends State<Header> {
   final GlobalKey _menuKey = GlobalKey();
 
-  Future<void> _showShopSubmenu() async {
+  double _menuTop() {
     final BuildContext keyContext = _menuKey.currentContext!;
     final RenderBox box = keyContext.findRenderObject() as RenderBox;
     final Offset position = box.localToGlobal(Offset.zero);
-    final Size size = box.size;
-    final RelativeRect rect = RelativeRect.fromLTRB(
-      position.dx,
-      position.dy + size.height,
-      position.dx + size.width,
-      position.dy,
-    );
-
-    const List<String> submenuLabels = [
-      'Option One',
-      'Option Two',
-      'Option Three',
-      'Option Four',
-      'Option Five',
-      'Option Six',
-      'Option Seven',
-    ];
-
-    await showMenu<String>(
-      context: keyContext,
-      position: rect,
-      items: submenuLabels.map((label) {
-        return PopupMenuItem<String>(
-          value: label,
-          child: Text(label),
-        );
-      }).toList(),
-    );
+    return position.dy + box.size.height;
   }
 
-  Future<void> _showPrintShackSubmenu() async {
-    final BuildContext keyContext = _menuKey.currentContext!;
-    final RenderBox box = keyContext.findRenderObject() as RenderBox;
-    final Offset position = box.localToGlobal(Offset.zero);
-    final Size size = box.size;
-    final RelativeRect rect = RelativeRect.fromLTRB(
-      position.dx,
-      position.dy + size.height,
-      position.dx + size.width,
-      position.dy,
+  OverlayEntry _showMenu(List<MapEntry<String, VoidCallback>> items) {
+    final overlay = Overlay.of(context);
+    late OverlayEntry entry;
+    final top = _menuTop();
+
+    entry = OverlayEntry(
+      builder: (_) => Positioned(
+        top: top,
+        left: 0,
+        right: 0,
+        child: Material(
+          color: Colors.transparent,
+          child: Stack(
+            children: [
+              Positioned.fill(
+                child: GestureDetector(
+                  behavior: HitTestBehavior.translucent,
+                  onTap: () => entry.remove(),
+                ),
+              ),
+              Align(
+                alignment: Alignment.topCenter,
+                child: Material(
+                  elevation: 4,
+                  color: Colors.white,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: items
+                        .map(
+                          (me) => ListTile(
+                            title: Text(me.key),
+                            onTap: () {
+                              entry.remove();
+                              Future.microtask(me.value);
+                            },
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
 
-    const List<String> printShackLabels = [
-      'Option 1',
-      'Option 2',
-    ];
+    overlay.insert(entry);
+    return entry;
+  }
 
-    await showMenu<String>(
-      context: keyContext,
-      position: rect,
-      items: printShackLabels.map((label) {
-        return PopupMenuItem<String>(
-          value: label,
-          child: Text(label),
-        );
-      }).toList(),
-    );
+  void _showPrimaryMenu() {
+    _showMenu([
+      MapEntry('Home', () => widget.onHomeTap()),
+      MapEntry(
+        'Shop',
+        () => _showMenu([
+          MapEntry('Option One', () {/* placeholder */}),
+          MapEntry('Option Two', () {/* placeholder */}),
+          MapEntry('Option Three', () {/* placeholder */}),
+          MapEntry('Option Four', () {/* placeholder */}),
+          MapEntry('Option Five', () {/* placeholder */}),
+          MapEntry('Option Six', () {/* placeholder */}),
+          MapEntry('Option Seven', () {/* placeholder */}),
+        ]),
+      ),
+      MapEntry(
+        'The Print Shack',
+        () => _showMenu([
+          MapEntry('Option 1', () {/* placeholder */}),
+          MapEntry('Option 2', () {/* placeholder */}),
+        ]),
+      ),
+      MapEntry('SALE', () => widget.onPlaceholderTap()),
+      MapEntry('About', () => Navigator.pushNamed(context, '/about')),
+    ]);
   }
 
   @override
@@ -445,59 +467,19 @@ class _HeaderState extends State<Header> {
                           ),
                           onPressed: widget.onPlaceholderTap,
                         ),
-                        Expanded(
-                          child: PopupMenuButton<String>(
-                            key: _menuKey,
-                            icon: const Icon(
-                              Icons.menu,
-                              size: 12,
-                              color: Colors.grey,
-                            ),
-                            constraints: BoxConstraints(
-                              minWidth: MediaQuery.of(context).size.width,
-                            ),
-                            onSelected: (value) {
-                              switch (value) {
-                                case 'Home':
-                                  widget.onHomeTap();
-                                  break;
-                                case 'Shop':
-                                  _showShopSubmenu();
-                                  break;
-                                case 'The Print Shack':
-                                  _showPrintShackSubmenu();
-                                  break;
-                                case 'SALE':
-                                  widget.onPlaceholderTap();
-                                  break;
-                                case 'About':
-                                  Navigator.pushNamed(context, '/about');
-                                  break;
-                              }
-                            },
-                            itemBuilder: (context) => [
-                              const PopupMenuItem(
-                                value: 'Home',
-                                child: Text('Home'),
-                              ),
-                              const PopupMenuItem(
-                                value: 'Shop',
-                                child: Text('Shop'),
-                              ),
-                              const PopupMenuItem(
-                                value: 'The Print Shack',
-                                child: Text('The Print Shack'),
-                              ),
-                              const PopupMenuItem(
-                                value: 'SALE',
-                                child: Text('SALE'),
-                              ),
-                              const PopupMenuItem(
-                                value: 'About',
-                                child: Text('About'),
-                              ),
-                            ],
+                        IconButton(
+                          key: _menuKey,
+                          icon: const Icon(
+                            Icons.menu,
+                            size: 18,
+                            color: Colors.grey,
                           ),
+                          padding: const EdgeInsets.all(8),
+                          constraints: const BoxConstraints(
+                            minWidth: 32,
+                            minHeight: 32,
+                          ),
+                          onPressed: _showPrimaryMenu,
                         ),
                       ],
                     ),
