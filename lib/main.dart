@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'product_page.dart';
 import 'about_page.dart';
+import 'login_in_page.dart';
 
 void main() {
   runApp(const UnionShopApp());
@@ -68,6 +69,7 @@ class UnionShopApp extends StatelessWidget {
       routes: {
         '/product': (context) => const ProductPage(),
         '/about': (context) => const AboutPage(),
+        '/login': (context) => const LoginInPage(), // added route
       },
     );
   }
@@ -452,7 +454,8 @@ class _HeaderState extends State<Header> {
                             minWidth: 32,
                             minHeight: 32,
                           ),
-                          onPressed: widget.onPlaceholderTap,
+                          onPressed: () =>
+                              Navigator.pushNamed(context, '/login'),
                         ),
                         IconButton(
                           icon: const Icon(
