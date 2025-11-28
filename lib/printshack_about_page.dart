@@ -1,22 +1,31 @@
 import 'package:flutter/material.dart';
+import 'main.dart';
 
 class PrintShackAboutPage extends StatelessWidget {
   const PrintShackAboutPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    void navigateToHome() {
+      Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+    }
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('The Union Print Shack'),
-      ),
-      body: const Padding(
-        padding: EdgeInsets.all(16.0),
+      body: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 12),
-            Text(
-              """Make It Yours at The Union Print Shack
+            Header(
+              onHomeTap: navigateToHome,
+              onPlaceholderTap: () {},
+            ),
+            const Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 12),
+                  Text(
+                    """Make It Yours at The Union Print Shack
 Want to add a personal touch? We’ve got you covered with heat-pressed customisation on all our clothing. Swing by the shop - our team’s always happy to help you pick the right gear and answer any questions.
 
 Uni Gear or Your Gear - We’ll Personalise It
@@ -30,8 +39,12 @@ We will print your clothing exactly as you have provided it to us, whether onlin
 
 Ready to Make It Yours?
 Pop in or get in touch today - let’s create something uniquely you with our personalisation service - The Union Print Shack!""",
-              style: TextStyle(fontSize: 16),
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ],
+              ),
             ),
+            const Footer(),
           ],
         ),
       ),
