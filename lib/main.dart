@@ -524,6 +524,22 @@ class Footer extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
+            """Opening Hours
+
+❄️ Winter Break Closure Dates ❄️
+Closing 4pm 19/12/2025
+Reopening 10am 05/01/2026
+Last post date: 12pm on 18/12/2025
+------------------------
+(Term Time)
+Monday - Friday 10am - 4pm
+(Outside of Term Time / Consolidation Weeks)
+Monday - Friday 10am - 3pm
+Purchase online 24/7""",
+            style: TextStyle(color: Colors.white, fontSize: 14),
+          ),
+          SizedBox(height: 12),
+          Text(
             'Union Shop',
             style: TextStyle(
               color: Colors.white,
