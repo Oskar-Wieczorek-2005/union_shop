@@ -1,8 +1,24 @@
 import 'package:flutter/material.dart';
 import 'main.dart';
 
-class PrintShackPage extends StatelessWidget {
+class PrintShackPage extends StatefulWidget {
   const PrintShackPage({Key? key}) : super(key: key);
+
+  @override
+  PrintShackPageState createState() => PrintShackPageState();
+}
+
+class PrintShackPageState extends State<PrintShackPage> {
+  String? _selectedOption;
+
+  static const List<String> _options = [
+    '1 line',
+    '2 lines',
+    '3 lines',
+    '4 lines',
+    'other_1',
+    'other_2',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +50,28 @@ class PrintShackPage extends StatelessWidget {
                   const Text(
                     'Personalisation',
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 8),
+                  DropdownButtonFormField<String>(
+                    value: _selectedOption,
+                    isExpanded: true,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                    ),
+                    hint: const Text('Choose an option'),
+                    items: _options.map((opt) {
+                      return DropdownMenuItem<String>(
+                        value: opt,
+                        child: Text(opt),
+                      );
+                    }).toList(),
+                    onChanged: (val) {
+                      setState(() {
+                        _selectedOption = val;
+                      });
+                    },
                   ),
                   const SizedBox(height: 8),
                   const Text(
