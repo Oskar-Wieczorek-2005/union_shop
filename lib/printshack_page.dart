@@ -20,6 +20,8 @@ class PrintShackPageState extends State<PrintShackPage> {
     'other_2',
   ];
 
+  int _quantity = 1;
+
   @override
   Widget build(BuildContext context) {
     void navigateToHome() {
@@ -108,6 +110,24 @@ class PrintShackPageState extends State<PrintShackPage> {
                       }),
                     );
                   }),
+                  const SizedBox(height: 8),
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 8),
+                    child: TextFormField(
+                      initialValue: '1',
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        labelText: 'Quantity',
+                        border: OutlineInputBorder(),
+                        isDense: true,
+                      ),
+                      onChanged: (val) {
+                        setState(() {
+                          _quantity = int.tryParse(val) ?? 0;
+                        });
+                      },
+                    ),
+                  ),
                   const SizedBox(height: 8),
                   const Text(
                     """£3 for one line of text! £5 for two!
