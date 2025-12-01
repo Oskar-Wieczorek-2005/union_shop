@@ -128,6 +128,21 @@ class PrintShackPageState extends State<PrintShackPage> {
                       },
                     ),
                   ),
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 12),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.purple,
+                          foregroundColor: Colors.white,
+                          padding: EdgeInsets.symmetric(vertical: 14),
+                        ),
+                        child: const Text('Add to cart'),
+                      ),
+                    ),
+                  ),
                   const SizedBox(height: 8),
                   const Text(
                     """£3 for one line of text! £5 for two!
