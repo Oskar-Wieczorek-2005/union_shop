@@ -519,11 +519,11 @@ class Footer extends StatelessWidget {
       width: double.infinity,
       color: const Color(0xFF4d2963),
       padding: const EdgeInsets.all(24),
-      child: const Column(
+      child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             """Opening Hours
 
 ❄️ Winter Break Closure Dates ❄️
@@ -538,8 +538,8 @@ Monday - Friday 10am - 3pm
 Purchase online 24/7""",
             style: TextStyle(color: Colors.white, fontSize: 14),
           ),
-          SizedBox(height: 12),
-          Text(
+          const SizedBox(height: 12),
+          const Text(
             'Union Shop',
             style: TextStyle(
               color: Colors.white,
@@ -547,16 +547,16 @@ Purchase online 24/7""",
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 8),
-          Text(
+          const SizedBox(height: 8),
+          const Text(
             '© 2025 Union Shop. All rights reserved.',
             style: TextStyle(
               color: Colors.white70,
               fontSize: 14,
             ),
           ),
-          SizedBox(height: 16),
-          Row(
+          const SizedBox(height: 16),
+          const Row(
             children: [
               Text(
                 'Home',
@@ -576,6 +576,45 @@ Purchase online 24/7""",
               Text(
                 'Contact',
                 style: TextStyle(color: Colors.white, fontSize: 14),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  decoration: const InputDecoration(
+                    hintText: 'Enter email for Latest offers',
+                    hintStyle: TextStyle(color: Colors.white70),
+                    filled: true,
+                    fillColor: Color(0xFF5a3a6b),
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.zero,
+                      borderSide: BorderSide.none,
+                    ),
+                  ),
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ),
+              const SizedBox(width: 8),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF4d2963),
+                  foregroundColor: Colors.white,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.zero,
+                  ),
+                ),
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                        content: Text('Subscribed to Latest offers')),
+                  );
+                },
+                child: const Text('Subscribe'),
               ),
             ],
           ),
