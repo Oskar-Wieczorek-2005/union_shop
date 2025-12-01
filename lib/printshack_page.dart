@@ -12,12 +12,12 @@ class PrintShackPageState extends State<PrintShackPage> {
   String? _selectedOption;
 
   static const List<String> _options = [
-    '1 line',
-    '2 lines',
-    '3 lines',
-    '4 lines',
-    'other_1',
-    'other_2',
+    '1 Line of Text',
+    '2 Lines of Text',
+    '3 Lines of Text',
+    '4 Lines of Text',
+    'Small Logo (Chest) ',
+    'Small Logo (Back)',
   ];
 
   int _quantity = 1;
@@ -37,13 +37,13 @@ class PrintShackPageState extends State<PrintShackPage> {
               onPlaceholderTap: () {},
             ),
             Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 12),
                   Image.network(
-                    'https://via.placeholder.com/600x200',
+                    'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
                     height: 200,
                     width: double.infinity,
                     fit: BoxFit.cover,
@@ -55,9 +55,9 @@ class PrintShackPageState extends State<PrintShackPage> {
                   ),
                   const SizedBox(height: 8),
                   DropdownButtonFormField<String>(
-                    value: _selectedOption,
+                    initialValue: _selectedOption,
                     isExpanded: true,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 12, vertical: 10),
@@ -80,29 +80,30 @@ class PrintShackPageState extends State<PrintShackPage> {
                     int numBoxes = 0;
                     if (_selectedOption != null) {
                       final s = _selectedOption!;
-                      if (s.startsWith('1'))
+                      if (s.startsWith('1')) {
                         numBoxes = 1;
-                      else if (s.startsWith('2'))
+                      } else if (s.startsWith('2')) {
                         numBoxes = 2;
-                      else if (s.startsWith('3'))
+                      } else if (s.startsWith('3')) {
                         numBoxes = 3;
-                      else if (s.startsWith('4'))
+                      } else if (s.startsWith('4')) {
                         numBoxes = 4;
-                      else
+                      } else {
                         numBoxes = 1;
+                      }
                     }
 
-                    if (numBoxes <= 0) return SizedBox.shrink();
+                    if (numBoxes <= 0) return const SizedBox.shrink();
 
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: List.generate(numBoxes, (i) {
                         return Padding(
-                          padding: EdgeInsets.only(bottom: 8),
+                          padding: const EdgeInsets.only(bottom: 8),
                           child: TextField(
                             decoration: InputDecoration(
                               labelText: 'Line ${i + 1}',
-                              border: OutlineInputBorder(),
+                              border: const OutlineInputBorder(),
                               isDense: true,
                             ),
                           ),
@@ -112,24 +113,25 @@ class PrintShackPageState extends State<PrintShackPage> {
                   }),
                   const SizedBox(height: 8),
                   Padding(
-                    padding: EdgeInsets.only(bottom: 8),
+                    padding: const EdgeInsets.only(bottom: 8),
                     child: TextFormField(
                       initialValue: '1',
                       keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Quantity',
                         border: OutlineInputBorder(),
                         isDense: true,
                       ),
                       onChanged: (val) {
                         setState(() {
-                          _quantity = int.tryParse(val) ?? 0;
+                          final parsed = int.tryParse(val) ?? 1;
+                          _quantity = parsed < 1 ? 1 : parsed;
                         });
                       },
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(bottom: 12),
+                    padding: const EdgeInsets.only(bottom: 12),
                     child: SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
@@ -144,7 +146,7 @@ class PrintShackPageState extends State<PrintShackPage> {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.purple,
                           foregroundColor: Colors.white,
-                          padding: EdgeInsets.symmetric(vertical: 14),
+                          padding: const EdgeInsets.symmetric(vertical: 14),
                         ),
                         child: const Text('Add to cart'),
                       ),
