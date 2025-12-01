@@ -122,7 +122,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       child: Container(
-                        color: Colors.black.withOpacity(0.7),
+                        color: Colors.black,
                       ),
                     ),
                   ),
@@ -582,9 +582,9 @@ Purchase online 24/7""",
           const SizedBox(height: 16),
           Row(
             children: [
-              Expanded(
+              const Expanded(
                 child: TextField(
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     hintText: 'Enter email for Latest offers',
                     hintStyle: TextStyle(color: Colors.white70),
                     filled: true,
@@ -596,7 +596,7 @@ Purchase online 24/7""",
                       borderSide: BorderSide.none,
                     ),
                   ),
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.white),
                 ),
               ),
               const SizedBox(width: 8),
