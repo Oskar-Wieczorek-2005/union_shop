@@ -3,6 +3,7 @@ import 'product_page.dart';
 import 'about_page.dart';
 import 'login_in_page.dart';
 import 'printshack_about_page.dart';
+import 'printshack_page.dart';
 
 void main() {
   runApp(const UnionShopApp());
@@ -69,7 +70,10 @@ class UnionShopApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/product': (context) => const ProductPage(),
-        '/printshack': (context) => const PrintShackAboutPage(), // new route
+        '/printshack': (context) =>
+            const PrintShackAboutPage(), // PrintShack about page
+        '/printshack_personalisation': (context) =>
+            const PrintShackPage(), // personalisation page
         '/about': (context) => const AboutPage(),
         '/login': (context) => const LoginInPage(), // added route
       },
@@ -376,10 +380,13 @@ class _HeaderState extends State<Header> {
         'The Print Shack',
         () => _showMenu([
           MapEntry(
-              'About',
-              () => Navigator.pushNamed(
-                  context, '/printshack')), // linked to printshack page
-          MapEntry('Personalisation', () {/* placeholder */}),
+            'About',
+            () => Navigator.pushNamed(context, '/printshack'),
+          ),
+          MapEntry(
+            'Personalisation',
+            () => Navigator.pushNamed(context, '/printshack_personalisation'),
+          ),
         ]),
       ),
       MapEntry('SALE', () => widget.onPlaceholderTap()),
