@@ -25,6 +25,11 @@ class PrintShackPage extends StatelessWidget {
                 children: [
                   SizedBox(height: 12),
                   Text(
+                    'Personalisation',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
                     """£3 for one line of text! £5 for two!
 
 One line of text is 10 characters.
