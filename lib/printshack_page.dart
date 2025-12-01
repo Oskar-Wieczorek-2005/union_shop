@@ -25,7 +25,11 @@ class PrintShackPage extends StatelessWidget {
                 children: [
                   SizedBox(height: 12),
                   Text(
-                    """printshack text""",
+                    """£3 for one line of text! £5 for two!
+
+One line of text is 10 characters.
+
+Please ensure all spellings are correct before submitting your purchase as we will print your item with the exact wording you provide. We will not be responsible for any incorrect spellings printed onto your garment. Personalised items do not qualify for refunds.""",
                     style: TextStyle(fontSize: 16),
                   ),
                 ],
