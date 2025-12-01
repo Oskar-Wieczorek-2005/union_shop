@@ -18,18 +18,25 @@ class PrintShackPage extends StatelessWidget {
               onHomeTap: navigateToHome,
               onPlaceholderTap: () {},
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 12),
-                  Text(
+                  const SizedBox(height: 12),
+                  Image.network(
+                    'https://via.placeholder.com/600x200',
+                    height: 200,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
+                  const SizedBox(height: 12),
+                  const Text(
                     'Personalisation',
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 8),
-                  Text(
+                  const SizedBox(height: 8),
+                  const Text(
                     """£3 for one line of text! £5 for two!
 
 One line of text is 10 characters.
