@@ -73,6 +73,41 @@ class PrintShackPageState extends State<PrintShackPage> {
                       });
                     },
                   ),
+                  const SizedBox(height: 12),
+                  Builder(builder: (context) {
+                    int numBoxes = 0;
+                    if (_selectedOption != null) {
+                      final s = _selectedOption!;
+                      if (s.startsWith('1'))
+                        numBoxes = 1;
+                      else if (s.startsWith('2'))
+                        numBoxes = 2;
+                      else if (s.startsWith('3'))
+                        numBoxes = 3;
+                      else if (s.startsWith('4'))
+                        numBoxes = 4;
+                      else
+                        numBoxes = 1;
+                    }
+
+                    if (numBoxes <= 0) return SizedBox.shrink();
+
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: List.generate(numBoxes, (i) {
+                        return Padding(
+                          padding: EdgeInsets.only(bottom: 8),
+                          child: TextField(
+                            decoration: InputDecoration(
+                              labelText: 'Line ${i + 1}',
+                              border: OutlineInputBorder(),
+                              isDense: true,
+                            ),
+                          ),
+                        );
+                      }),
+                    );
+                  }),
                   const SizedBox(height: 8),
                   const Text(
                     """£3 for one line of text! £5 for two!
