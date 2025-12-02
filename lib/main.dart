@@ -4,6 +4,7 @@ import 'about_page.dart';
 import 'login_in_page.dart';
 import 'printshack_about_page.dart';
 import 'printshack_page.dart';
+import 'cart_page.dart';
 
 void main() {
   runApp(const UnionShopApp());
@@ -480,7 +481,13 @@ class _HeaderState extends State<Header> {
                             minWidth: 32,
                             minHeight: 32,
                           ),
-                          onPressed: widget.onPlaceholderTap,
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => const CartPage()),
+                            );
+                          },
                         ),
                         IconButton(
                           key: _menuKey,
