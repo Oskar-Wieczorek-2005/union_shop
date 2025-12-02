@@ -2,8 +2,15 @@ import 'package:flutter/material.dart';
 import 'main.dart';
 import 'cart_page.dart';
 
-class ProductPage extends StatelessWidget {
+class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
+
+  @override
+  State<ProductPage> createState() => _ProductPageState();
+}
+
+class _ProductPageState extends State<ProductPage> {
+  int _quantity = 1;
 
   void navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
@@ -90,7 +97,7 @@ class ProductPage extends StatelessWidget {
 
                   // Product price
                   Text(
-                    product.price,
+                    '£${product.price.toStringAsFixed(2)}',
                     style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -99,6 +106,31 @@ class ProductPage extends StatelessWidget {
                   ),
 
                   const SizedBox(height: 16),
+
+                  // Quantity selector
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          if (_quantity > 1) setState(() => _quantity--);
+                        },
+                        icon: const Icon(Icons.remove),
+                      ),
+                      Text(
+                        '$_quantity',
+                        style: const TextStyle(fontSize: 18),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          setState(() => _quantity++);
+                        },
+                        icon: const Icon(Icons.add),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 8),
 
                   // ADD TO CART BUTTON
                   SizedBox(
@@ -109,7 +141,8 @@ class ProductPage extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(vertical: 14),
                       ),
                       onPressed: () {
-                        addToCart(product);
+                        // add product with quantity and open cart
+                        addToCart(product, _quantity);
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (_) => const CartPage()),
