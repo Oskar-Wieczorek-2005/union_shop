@@ -18,8 +18,35 @@ void addToCart(Product p, int qty) {
   }
 }
 
-class CartPage extends StatelessWidget {
+class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
+
+  @override
+  _CartPageState createState() => _CartPageState();
+}
+
+class _CartPageState extends State<CartPage> {
+  void _increment(CartItem item) {
+    setState(() {
+      item.quantity++;
+    });
+  }
+
+  void _decrement(CartItem item) {
+    setState(() {
+      if (item.quantity > 1) {
+        item.quantity--;
+      } else {
+        cartItems.remove(item);
+      }
+    });
+  }
+
+  void _removeItem(CartItem item) {
+    setState(() {
+      cartItems.remove(item);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,10 +96,36 @@ class CartPage extends StatelessWidget {
                           child: Card(
                             child: ListTile(
                               title: Text(c.product.title),
-                              subtitle: Text(
-                                  '${c.quantity} × £${c.product.price.toStringAsFixed(2)}'),
-                              trailing: Text(
-                                  '£${(c.product.price * c.quantity).toStringAsFixed(2)}'),
+                              subtitle: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  IconButton(
+                                    icon: const Icon(Icons.remove),
+                                    onPressed: () => _decrement(c),
+                                  ),
+                                  Text('${c.quantity}'),
+                                  IconButton(
+                                    icon: const Icon(Icons.add),
+                                    onPressed: () => _increment(c),
+                                  ),
+                                  const SizedBox(width: 12),
+                                  Text(
+                                      '£${c.product.price.toStringAsFixed(2)} each'),
+                                ],
+                              ),
+                              trailing: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    '£${(c.product.price * c.quantity).toStringAsFixed(2)}',
+                                  ),
+                                  IconButton(
+                                    icon: const Icon(Icons.delete),
+                                    onPressed: () => _removeItem(c),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         )),
