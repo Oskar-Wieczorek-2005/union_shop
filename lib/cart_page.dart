@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
 import 'main.dart';
 
-final List<Product> cartItems = [];
+class CartItem {
+  final Product product;
+  int quantity;
+  CartItem(this.product, this.quantity);
+}
 
-void addToCart(Product p) {
-  cartItems.add(p);
+final List<CartItem> cartItems = [];
+
+void addToCart(Product p, int qty) {
+  final existing = cartItems.indexWhere((c) => c.product.title == p.title);
+  if (existing >= 0) {
+    cartItems[existing].quantity += qty;
+  } else {
+    cartItems.add(CartItem(p, qty));
+  }
 }
 
 class CartPage extends StatelessWidget {
@@ -17,6 +28,11 @@ class CartPage extends StatelessWidget {
     }
 
     final bool isCartEmpty = cartItems.isEmpty;
+
+    double cartTotal() {
+      return cartItems.fold(
+          0.0, (sum, c) => sum + (c.product.price * c.quantity.toDouble()));
+    }
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -48,15 +64,27 @@ class CartPage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(
                   children: [
-                    ...cartItems.map((p) => Padding(
+                    ...cartItems.map((c) => Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
                           child: Card(
                             child: ListTile(
-                              title: Text(p.title),
-                              subtitle: Text(p.price),
+                              title: Text(c.product.title),
+                              subtitle: Text(
+                                  '${c.quantity} × £${c.product.price.toStringAsFixed(2)}'),
+                              trailing: Text(
+                                  '£${(c.product.price * c.quantity).toStringAsFixed(2)}'),
                             ),
                           ),
                         )),
+                    const SizedBox(height: 12),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        'Total: £${cartTotal().toStringAsFixed(2)}',
+                        style: const TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                    ),
                   ],
                 ),
               ),
