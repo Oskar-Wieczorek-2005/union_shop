@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'main.dart';
+import 'cart_page.dart';
 
 class PrintShackPage extends StatefulWidget {
   const PrintShackPage({Key? key}) : super(key: key);
@@ -136,11 +137,41 @@ class PrintShackPageState extends State<PrintShackPage> {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
+                          double unitPrice = 3.0;
+                          if (_selectedOption != null) {
+                            final s = _selectedOption!;
+                            if (s.startsWith('1')) {
+                              unitPrice = 3.0;
+                            } else if (s.startsWith('2')) {
+                              unitPrice = 5.0;
+                            } else if (s.startsWith('3')) {
+                              unitPrice = 7.0;
+                            } else if (s.startsWith('4')) {
+                              unitPrice = 10.0;
+                            } else if (s.toLowerCase().contains('small logo')) {
+                              unitPrice = 4.0;
+                            }
+                          }
+
+                          final title =
+                              'Personalisation - ${_selectedOption ?? 'Default'}';
+                          final product = Product(
+                            title: title,
+                            price: unitPrice,
+                            imageUrl: '', // Provide a default or empty value
+                            description: '', // Provide a default or empty value
+                          );
+                          addToCart(product, _quantity);
+
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content:
                                   Text('Added $_quantity items to the cart'),
                             ),
+                          );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => const CartPage()),
                           );
                         },
                         style: ElevatedButton.styleFrom(
