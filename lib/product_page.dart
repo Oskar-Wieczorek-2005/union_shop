@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'main.dart';
+import 'cart_page.dart';
 
 class ProductPage extends StatelessWidget {
   const ProductPage({super.key});
@@ -107,7 +108,13 @@ class ProductPage extends StatelessWidget {
                         backgroundColor: const Color(0xFF4d2963),
                         padding: const EdgeInsets.symmetric(vertical: 14),
                       ),
-                      onPressed: placeholderCallbackForButtons,
+                      onPressed: () {
+                        addToCart(product);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => const CartPage()),
+                        );
+                      },
                       child: const Text(
                         'ADD TO CART',
                         style: TextStyle(
