@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'main.dart'; // for Header and Footer
+import 'main.dart'; // for Header, Footer, Product, ProductCard
 
 const String _upsuImage =
     'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282';
@@ -50,6 +50,8 @@ class SalesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isWide = MediaQuery.of(context).size.width > 600;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -58,25 +60,46 @@ class SalesPage extends StatelessWidget {
               onHomeTap: () => _navigateHome(context),
               onPlaceholderTap: _placeholderCallbackForButtons,
             ),
-            const Padding(
-              padding: EdgeInsets.all(24.0),
+            Padding(
+              padding: const EdgeInsets.all(24.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'SALE',
                     style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 16),
-                  Text(
-                    'Discover our latest discounts and special offers.',
+                  const SizedBox(height: 16),
+                  const Text(
+                    'Browse items currently in our sale.',
                     style: TextStyle(fontSize: 16),
                   ),
-                  SizedBox(height: 24),
-                  ////
+                  const SizedBox(height: 24),
+                  GridView.count(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    crossAxisCount: isWide ? 3 : 1,
+                    crossAxisSpacing: 24,
+                    mainAxisSpacing: 32,
+                    childAspectRatio: 3 / 4,
+                    children: saleItems.map((product) {
+                      return ProductCard(
+                        title: product.title,
+                        price: product.price,
+                        imageUrl: product.imageUrl,
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            '/product',
+                            arguments: product,
+                          );
+                        },
+                      );
+                    }).toList(),
+                  ),
                 ],
               ),
             ),
