@@ -238,8 +238,35 @@ final List<Product> graduation = [
 class CollectionsPage extends StatelessWidget {
   const CollectionsPage({Key? key}) : super(key: key);
 
+  MapEntry<String, List<Product>> _resolveCollection(String? key) {
+    switch (key) {
+      case 'clothing':
+        return MapEntry('Clothing', clothing);
+      case 'merchandise':
+        return MapEntry('Merchandise', merchandise);
+      case 'halloween':
+        return MapEntry('Halloween', halloween);
+      case 'signature':
+        return MapEntry('Signature & Essential Range', signutureEssentialRange);
+      case 'portsmouthCity':
+        return MapEntry('Portsmouth City Collection', portsmouthCityCollection);
+      case 'pride':
+        return MapEntry('Pr*de Collection', prideCollection);
+      case 'graduation':
+        return MapEntry('Graduation', graduation);
+      default:
+        return MapEntry('All Products', products);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final arg = ModalRoute.of(context)?.settings.arguments;
+    final key = arg is String ? arg : null;
+    final resolved = _resolveCollection(key);
+    final String title = resolved.key;
+    final List<Product> list = resolved.value;
+
     return Scaffold(
       body: Column(
         children: [
@@ -249,12 +276,50 @@ class CollectionsPage extends StatelessWidget {
             onPlaceholderTap: () {},
           ),
           const SizedBox(height: 24),
-          Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text('Title', style: Theme.of(context).textTheme.titleLarge),
-              ],
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: ListView(
+                children: [
+                  Text(
+                    title,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineMedium
+                        ?.copyWith(fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 16),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height,
+                    child: GridView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount:
+                            MediaQuery.of(context).size.width > 900 ? 3 : 2,
+                        mainAxisSpacing: 24,
+                        crossAxisSpacing: 24,
+                        childAspectRatio: 3 / 4,
+                      ),
+                      itemCount: list.length,
+                      itemBuilder: (context, index) {
+                        final p = list[index];
+                        return ProductCard(
+                          title: p.title,
+                          price: p.price,
+                          imageUrl: p.imageUrl,
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              '/product',
+                              arguments: p,
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
