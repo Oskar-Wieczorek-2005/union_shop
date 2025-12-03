@@ -37,6 +37,8 @@ final List<Product> saleItems = [
       description: 'Art print of the city landmarks.')
 ];
 
+double _salePrice(double basePrice) => basePrice * 0.8;
+
 class SalesPage extends StatelessWidget {
   const SalesPage({super.key});
 
@@ -86,17 +88,56 @@ class SalesPage extends StatelessWidget {
                     mainAxisSpacing: 32,
                     childAspectRatio: 3 / 4,
                     children: saleItems.map((product) {
-                      return ProductCard(
-                        title: product.title,
-                        price: product.price,
-                        imageUrl: product.imageUrl,
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            '/product',
-                            arguments: product,
-                          );
-                        },
+                      final discounted = _salePrice(product.price);
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: ProductCard(
+                              title: product.title,
+                              price: discounted, // show sale price in card
+                              imageUrl: product.imageUrl,
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  '/product',
+                                  arguments: product,
+                                );
+                              },
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Row(
+                            children: [
+                              Text(
+                                '£${discounted.toStringAsFixed(2)}',
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.red,
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Text(
+                                '£${product.price.toStringAsFixed(2)}',
+                                style: const TextStyle(
+                                  fontSize: 13,
+                                  color: Colors.grey,
+                                  decoration: TextDecoration.lineThrough,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 2),
+                          const Text(
+                            '20% OFF',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.red,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
                       );
                     }).toList(),
                   ),
