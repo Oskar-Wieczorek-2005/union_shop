@@ -6,6 +6,7 @@ import 'printshack_about_page.dart';
 import 'printshack_page.dart';
 import 'cart_page.dart';
 import 'collections_page.dart';
+import 'sales_page.dart';
 
 void main() {
   runApp(const UnionShopApp());
@@ -79,6 +80,7 @@ class UnionShopApp extends StatelessWidget {
         '/about': (context) => const AboutPage(),
         '/login': (context) => const LoginInPage(), // added route
         '/collections': (context) => const CollectionsPage(), // NEW
+        '/sale': (context) => const SalesPage(),
       },
     );
   }
@@ -441,7 +443,10 @@ class _HeaderState extends State<Header> {
           ),
         ]),
       ),
-      MapEntry('SALE', () => widget.onPlaceholderTap()),
+      MapEntry(
+        'SALE',
+        () => Navigator.pushNamed(context, '/sale'),
+      ),
       MapEntry('About', () => Navigator.pushNamed(context, '/about')),
     ]);
   }
