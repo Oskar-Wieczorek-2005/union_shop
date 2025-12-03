@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'main.dart';
 
-<<<<<<< HEAD
 const String _upsuImage =
     'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282';
 
@@ -236,8 +235,6 @@ final List<Product> graduation = [
       description: 'Tassel and charm set for graduation caps.'),
 ];
 
-=======
->>>>>>> 99df224ec72591c0326dbb790c90c3fa1565b6e1
 class CollectionsPage extends StatelessWidget {
   const CollectionsPage({Key? key}) : super(key: key);
 
