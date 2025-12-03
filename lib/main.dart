@@ -5,6 +5,7 @@ import 'login_in_page.dart';
 import 'printshack_about_page.dart';
 import 'printshack_page.dart';
 import 'cart_page.dart';
+import 'collections_page.dart';
 
 void main() {
   runApp(const UnionShopApp());
@@ -77,6 +78,7 @@ class UnionShopApp extends StatelessWidget {
             const PrintShackPage(), // personalisation page
         '/about': (context) => const AboutPage(),
         '/login': (context) => const LoginInPage(), // added route
+        '/collections': (context) => const CollectionsPage(), // NEW
       },
     );
   }
@@ -368,13 +370,62 @@ class _HeaderState extends State<Header> {
       MapEntry(
         'Shop',
         () => _showMenu([
-          MapEntry('Clothing', () {/* placeholder */}),
-          MapEntry('Merchendice', () {/* placeholder */}),
-          MapEntry('Halloween', () {/* placeholder */}),
-          MapEntry('Signiture & Essential Range', () {/* placeholder */}),
-          MapEntry('Portsmouth City Colection', () {/* placeholder */}),
-          MapEntry('Pr*de Collection', () {/* placeholder */}),
-          MapEntry('Graduation', () {/* placeholder */}),
+          MapEntry(
+            'Clothing',
+            () => Navigator.pushNamed(
+              context,
+              '/collections',
+              arguments: 'clothing',
+            ),
+          ),
+          MapEntry(
+            'Merchendice',
+            () => Navigator.pushNamed(
+              context,
+              '/collections',
+              arguments: 'merchandise',
+            ),
+          ),
+          MapEntry(
+            'Halloween',
+            () => Navigator.pushNamed(
+              context,
+              '/collections',
+              arguments: 'halloween',
+            ),
+          ),
+          MapEntry(
+            'Signiture & Essential Range',
+            () => Navigator.pushNamed(
+              context,
+              '/collections',
+              arguments: 'signature',
+            ),
+          ),
+          MapEntry(
+            'Portsmouth City Colection',
+            () => Navigator.pushNamed(
+              context,
+              '/collections',
+              arguments: 'portsmouthCity',
+            ),
+          ),
+          MapEntry(
+            'Pr*de Collection',
+            () => Navigator.pushNamed(
+              context,
+              '/collections',
+              arguments: 'pride',
+            ),
+          ),
+          MapEntry(
+            'Graduation',
+            () => Navigator.pushNamed(
+              context,
+              '/collections',
+              arguments: 'graduation',
+            ),
+          ),
         ]),
       ),
       MapEntry(
