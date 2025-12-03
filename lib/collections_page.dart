@@ -268,18 +268,19 @@ class CollectionsPage extends StatelessWidget {
     final List<Product> list = resolved.value;
 
     return Scaffold(
-      body: Column(
-        children: [
-          Header(
-            onHomeTap: () =>
-                Navigator.pushNamedAndRemoveUntil(context, '/', (r) => false),
-            onPlaceholderTap: () {},
-          ),
-          const SizedBox(height: 24),
-          Expanded(
-            child: Padding(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Header(
+              onHomeTap: () =>
+                  Navigator.pushNamedAndRemoveUntil(context, '/', (r) => false),
+              onPlaceholderTap: () {},
+            ),
+            const SizedBox(height: 24),
+            Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: ListView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     title,
@@ -289,42 +290,41 @@ class CollectionsPage extends StatelessWidget {
                         ?.copyWith(fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 16),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height,
-                    child: GridView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount:
-                            MediaQuery.of(context).size.width > 900 ? 3 : 2,
-                        mainAxisSpacing: 24,
-                        crossAxisSpacing: 24,
-                        childAspectRatio: 3 / 4,
-                      ),
-                      itemCount: list.length,
-                      itemBuilder: (context, index) {
-                        final p = list[index];
-                        return ProductCard(
-                          title: p.title,
-                          price: p.price,
-                          imageUrl: p.imageUrl,
-                          onTap: () {
-                            Navigator.pushNamed(
-                              context,
-                              '/product',
-                              arguments: p,
-                            );
-                          },
-                        );
-                      },
+                  GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount:
+                          MediaQuery.of(context).size.width > 900 ? 3 : 2,
+                      mainAxisSpacing: 24,
+                      crossAxisSpacing: 24,
+                      childAspectRatio: 3 / 4,
                     ),
+                    itemCount: list.length,
+                    itemBuilder: (context, index) {
+                      final p = list[index];
+                      return ProductCard(
+                        title: p.title,
+                        price: p.price,
+                        imageUrl: p.imageUrl,
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            '/product',
+                            arguments: p,
+                          );
+                        },
+                      );
+                    },
                   ),
                 ],
               ),
             ),
-          ),
-        ],
+            const SizedBox(height: 24),
+            const Footer(),
+          ],
+        ),
       ),
-      bottomNavigationBar: const Footer(),
     );
   }
 }
