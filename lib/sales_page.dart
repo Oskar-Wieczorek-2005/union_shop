@@ -4,7 +4,7 @@ import 'main.dart'; // for Header and Footer
 const String _upsuImage =
     'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282';
 
-final List<Product> clothing = [
+final List<Product> saleItems = [
   Product(
       title: 'Portsmouth University Shirt',
       price: 20.00,
