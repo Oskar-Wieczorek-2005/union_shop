@@ -1,40 +1,14 @@
 import 'package:flutter/material.dart';
-import 'main.dart'; // for Header, Footer, Product, ProductCard
-
-const String _upsuImage =
-    'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282';
+import 'main.dart';
+import 'collections_page.dart';
 
 final List<Product> saleItems = [
-  Product(
-      title: 'Portsmouth University Shirt',
-      price: 20.00,
-      imageUrl: _upsuImage,
-      description: 'Comfortable shirt with Portsmouth University logo.'),
-  Product(
-      title: 'Portsmouth Cap',
-      price: 12.00,
-      imageUrl: _upsuImage,
-      description: 'Adjustable cap with embroidered crest.'),
-  Product(
-      title: 'Portsmouth City Hoodie',
-      price: 30.00,
-      imageUrl: _upsuImage,
-      description: 'Hoodie featuring city skyline print.'),
-  Product(
-      title: 'UPS Keyring',
-      price: 4.50,
-      imageUrl: _upsuImage,
-      description: 'Metal keyring with union crest.'),
-  Product(
-      title: 'UPS Mug',
-      price: 8.00,
-      imageUrl: _upsuImage,
-      description: 'Ceramic mug with university print.'),
-  Product(
-      title: 'City Poster',
-      price: 6.00,
-      imageUrl: _upsuImage,
-      description: 'Art print of the city landmarks.')
+  portsmouthUniversityShirt,
+  portsmouthCap,
+  upsKeyring,
+  upsMug,
+  upsToteBag,
+  notebook,
 ];
 
 double _salePrice(double basePrice) => basePrice * 0.8;
