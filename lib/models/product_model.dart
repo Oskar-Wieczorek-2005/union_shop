@@ -12,11 +12,10 @@ class Product {
   });
 }
 
-// Unique product instances
 final Product portsmouthUniversityShirt = Product(
   title: 'Portsmouth University Shirt',
   price: 20.00,
-  imageUrl: 'assets/images/PU_shirt.png', // used by Image.asset
+  imageUrl: 'assets/images/PU_shirt.png',
   description: 'Comfortable shirt with Portsmouth University logo.',
 );
 
@@ -139,7 +138,6 @@ final Product graduationSash = Product(
   description: 'Customisable sash for graduating students.',
 );
 
-// Section lists (collections) built from the shared product instances.
 final List<Product> clothing = [
   portsmouthUniversityShirt,
   portsmouthUniversityHoodie,
@@ -147,6 +145,7 @@ final List<Product> clothing = [
   portsmouthLightweightJacket,
   portsmouthCap,
   portsmouthSportsTank,
+  signatureSocks,
 ];
 
 final List<Product> merchandise = [
@@ -159,46 +158,41 @@ final List<Product> merchandise = [
 ];
 
 final List<Product> halloween = [
-  portsmouthUniversityShirt,
-  portsmouthUniversityHoodie,
-  portsmouthCap,
-  portsmouthSportsTank,
   spookyTee,
+  portsmouthUniversityHoodie,
   upsMug,
 ];
 
 final List<Product> signutureEssentialRange = [
   portsmouthUniversityShirt,
+  portsmouthUniversityHoodie,
   portsmouthPolo,
-  portsmouthSportsTank,
-  upsToteBag,
   portsmouthCap,
   signatureSocks,
+  upsToteBag,
 ];
 
 final List<Product> portsmouthCityCollection = [
-  portsmouthUniversityShirt,
   portsmouthLightweightJacket,
   portsmouthCap,
   upsToteBag,
-  stickerPack,
   upsKeyring,
+  notebook,
 ];
 
 final List<Product> prideCollection = [
-  portsmouthUniversityHoodie,
-  portsmouthUniversityShirt,
-  upsToteBag,
-  penSet,
   prideWristband,
   prideFlag,
+  portsmouthUniversityHoodie,
+  portsmouthSportsTank,
+  upsToteBag,
+  stickerPack,
 ];
 
 final List<Product> graduation = [
-  portsmouthUniversityShirt,
-  portsmouthUniversityHoodie,
-  upsMug,
-  upsKeyring,
   graduationGownHire,
   graduationSash,
+  portsmouthUniversityShirt,
+  upsMug,
+  upsKeyring,
 ];
