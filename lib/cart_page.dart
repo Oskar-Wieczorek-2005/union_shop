@@ -120,9 +120,16 @@ class _CartPageState extends State<CartPage> {
                                   Text(
                                     '£${(c.product.price * c.quantity).toStringAsFixed(2)}',
                                   ),
-                                  IconButton(
-                                    icon: const Icon(Icons.delete),
-                                    onPressed: () => _removeItem(c),
+                                  SizedBox(
+                                    height: 24,
+                                    width: 24,
+                                    child: IconButton(
+                                      padding: EdgeInsets.zero,
+                                      constraints: const BoxConstraints(),
+                                      iconSize: 18,
+                                      icon: const Icon(Icons.delete),
+                                      onPressed: () => _removeItem(c),
+                                    ),
                                   ),
                                 ],
                               ),
