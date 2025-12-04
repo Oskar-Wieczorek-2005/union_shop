@@ -100,7 +100,7 @@ final Product penSet = Product(
 final Product spookyTee = Product(
   title: 'Spooky Tee',
   price: 16.00,
-  imageUrl: 'assets/images/PU_tee.png',
+  imageUrl: 'assets/images/PU_tree.png',
   description: 'Halloween themed tee with glow print.',
 );
 
