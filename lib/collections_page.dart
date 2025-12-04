@@ -138,7 +138,6 @@ final Product graduationSash = Product(
   description: 'Customisable sash for graduating students.',
 );
 
-// Clothing keeps its own items.
 final List<Product> clothing = [
   portsmouthUniversityShirt,
   portsmouthUniversityHoodie,
@@ -148,7 +147,6 @@ final List<Product> clothing = [
   portsmouthSportsTank,
 ];
 
-// Merchandise keeps its own items.
 final List<Product> merchandise = [
   upsKeyring,
   upsMug,
@@ -158,7 +156,6 @@ final List<Product> merchandise = [
   penSet,
 ];
 
-// Halloween reuses mostly clothing + one unique + reused mug.
 final List<Product> halloween = [
   portsmouthUniversityShirt,
   portsmouthUniversityHoodie,
@@ -168,7 +165,6 @@ final List<Product> halloween = [
   upsMug,
 ];
 
-// Signature range reuses clothing + tote and signature items.
 final List<Product> signutureEssentialRange = [
   portsmouthUniversityShirt,
   portsmouthPolo,
@@ -178,7 +174,6 @@ final List<Product> signutureEssentialRange = [
   signatureSocks,
 ];
 
-// Portsmouth City collection reuses clothing + some merch.
 final List<Product> portsmouthCityCollection = [
   portsmouthUniversityShirt,
   portsmouthLightweightJacket,
@@ -188,7 +183,6 @@ final List<Product> portsmouthCityCollection = [
   upsKeyring,
 ];
 
-// Pride collection reuses tote, hoodie, tee, pen, and unique pride items.
 final List<Product> prideCollection = [
   portsmouthUniversityHoodie,
   portsmouthUniversityShirt,
@@ -198,7 +192,6 @@ final List<Product> prideCollection = [
   prideFlag,
 ];
 
-// Graduation reuses mug, keyring, shirt, hoodie plus 2 uniques.
 final List<Product> graduation = [
   portsmouthUniversityShirt,
   portsmouthUniversityHoodie,
