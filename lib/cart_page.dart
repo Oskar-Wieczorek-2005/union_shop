@@ -142,6 +142,12 @@ class _CartPageState extends State<CartPage> {
                   ],
                 ),
               ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: navigateToHome,
+              child: const Text('Return to shopping'),
+            ),
+            const SizedBox(height: 16),
             const Footer(),
           ],
         ),
