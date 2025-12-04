@@ -26,6 +26,27 @@ class CollectionsPage extends StatelessWidget {
     }
   }
 
+  String? _collectionKeyFromSecondFilter(String? option) {
+    switch (option) {
+      case 'Clothing':
+        return 'clothing';
+      case 'Merchandise':
+        return 'merchandise';
+      case 'Halloween':
+        return 'halloween';
+      case 'Signature & Essential Range':
+        return 'signature';
+      case 'Portsmouth City Collection':
+        return 'portsmouthCity';
+      case 'Pr*de Collection':
+        return 'pride';
+      case 'Graduation':
+        return 'graduation';
+      default:
+        return null;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final arg = ModalRoute.of(context)?.settings.arguments;
@@ -101,47 +122,53 @@ class CollectionsPage extends StatelessWidget {
                   const SizedBox(width: 24),
                   DropdownButton<String>(
                     value: secondFilterLabel,
-                    hint: const Text('More options'),
+                    hint: const Text('Collections'),
                     onChanged: (value) {
                       if (value == null) return;
+
+                      final mappedCollectionKey =
+                          _collectionKeyFromSecondFilter(value);
+
+                      if (mappedCollectionKey == null) return;
+
                       Navigator.pushReplacementNamed(
                         context,
                         '/collections',
                         arguments: {
-                          'collectionKey': collectionKey,
-                          'filter': filterLabel,
+                          'collectionKey': mappedCollectionKey,
+                          'filter': null,
                           'secondFilter': value,
                         },
                       );
                     },
                     items: const [
                       DropdownMenuItem(
-                        value: 'Option 1',
-                        child: Text('Option 1'),
+                        value: 'Clothing',
+                        child: Text('Clothing'),
                       ),
                       DropdownMenuItem(
-                        value: 'Option 2',
-                        child: Text('Option 2'),
+                        value: 'Merchandise',
+                        child: Text('Merchandise'),
                       ),
                       DropdownMenuItem(
-                        value: 'Option 3',
-                        child: Text('Option 3'),
+                        value: 'Halloween',
+                        child: Text('Halloween'),
                       ),
                       DropdownMenuItem(
-                        value: 'Option 4',
-                        child: Text('Option 4'),
+                        value: 'Signature & Essential Range',
+                        child: Text('Signature & Essential Range'),
                       ),
                       DropdownMenuItem(
-                        value: 'Option 5',
-                        child: Text('Option 5'),
+                        value: 'Portsmouth City Collection',
+                        child: Text('Portsmouth City Collection'),
                       ),
                       DropdownMenuItem(
-                        value: 'Option 6',
-                        child: Text('Option 6'),
+                        value: 'Pr*de Collection',
+                        child: Text('Pr*de Collection'),
                       ),
                       DropdownMenuItem(
-                        value: 'Option 7',
-                        child: Text('Option 7'),
+                        value: 'Graduation',
+                        child: Text('Graduation'),
                       ),
                     ],
                   ),
