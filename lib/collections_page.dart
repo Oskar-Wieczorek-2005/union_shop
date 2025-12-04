@@ -277,6 +277,35 @@ class CollectionsPage extends StatelessWidget {
               onPlaceholderTap: () {},
             ),
             const SizedBox(height: 24),
+            // --- Filter by selector (placeholders only) ---
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: Row(
+                children: [
+                  Text(
+                    'Filter by',
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  const SizedBox(width: 16),
+                  DropdownButton<String>(
+                    value: null,
+                    hint: const Text('Choose a filler:'),
+                    onChanged: (_) {},
+                    items: const [
+                      DropdownMenuItem(
+                        value: 'Price: Low to High',
+                        child: Text('Price: Low to High'),
+                      ),
+                      DropdownMenuItem(
+                        value: 'Product Name: A to Z',
+                        child: Text('Product Name: A to Z'),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 24),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
               child: Column(
