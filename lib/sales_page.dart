@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'main.dart';
-import 'collections_page.dart';
+import 'models/product_model.dart';
 
 final List<Product> saleItems = [
   portsmouthUniversityShirt,
