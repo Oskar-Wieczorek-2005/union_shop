@@ -262,10 +262,27 @@ class CollectionsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final arg = ModalRoute.of(context)?.settings.arguments;
-    final key = arg is String ? arg : null;
-    final resolved = _resolveCollection(key);
+
+    String? collectionKey;
+    String? filterLabel;
+
+    if (arg is String) {
+      collectionKey = arg;
+    } else if (arg is Map) {
+      collectionKey = arg['collectionKey'] as String?;
+      filterLabel = arg['filter'] as String?;
+    }
+
+    final resolved = _resolveCollection(collectionKey);
     final String title = resolved.key;
-    final List<Product> list = resolved.value;
+    final List<Product> baseList = resolved.value;
+    final List<Product> list = List<Product>.from(baseList);
+    if (filterLabel == 'Price: Low to High') {
+      list.sort((a, b) => a.price.compareTo(b.price));
+    } else if (filterLabel == 'Product Name: A to Z') {
+      list.sort(
+          (a, b) => a.title.toLowerCase().compareTo(b.title.toLowerCase()));
+    }
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -277,7 +294,6 @@ class CollectionsPage extends StatelessWidget {
               onPlaceholderTap: () {},
             ),
             const SizedBox(height: 24),
-            // --- Filter by selector (placeholders only) ---
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
               child: Row(
@@ -288,9 +304,19 @@ class CollectionsPage extends StatelessWidget {
                   ),
                   const SizedBox(width: 16),
                   DropdownButton<String>(
-                    value: null,
+                    value: filterLabel,
                     hint: const Text('Choose a filler:'),
-                    onChanged: (_) {},
+                    onChanged: (value) {
+                      if (value == null) return;
+                      Navigator.pushReplacementNamed(
+                        context,
+                        '/collections',
+                        arguments: {
+                          'collectionKey': collectionKey,
+                          'filter': value,
+                        },
+                      );
+                    },
                     items: const [
                       DropdownMenuItem(
                         value: 'Price: Low to High',
@@ -299,7 +325,7 @@ class CollectionsPage extends StatelessWidget {
                       DropdownMenuItem(
                         value: 'Product Name: A to Z',
                         child: Text('Product Name: A to Z'),
-                      )
+                      ),
                     ],
                   ),
                 ],
