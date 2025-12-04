@@ -32,12 +32,14 @@ class CollectionsPage extends StatelessWidget {
 
     String? collectionKey;
     String? filterLabel;
+    String? secondFilterLabel;
 
     if (arg is String) {
       collectionKey = arg;
     } else if (arg is Map) {
       collectionKey = arg['collectionKey'] as String?;
       filterLabel = arg['filter'] as String?;
+      secondFilterLabel = arg['secondFilter'] as String?;
     }
 
     final resolved = _resolveCollection(collectionKey);
@@ -72,7 +74,7 @@ class CollectionsPage extends StatelessWidget {
                   const SizedBox(width: 16),
                   DropdownButton<String>(
                     value: filterLabel,
-                    hint: const Text('Choose a filler:'),
+                    hint: const Text('Choose a filter:'),
                     onChanged: (value) {
                       if (value == null) return;
                       Navigator.pushReplacementNamed(
@@ -81,6 +83,7 @@ class CollectionsPage extends StatelessWidget {
                         arguments: {
                           'collectionKey': collectionKey,
                           'filter': value,
+                          'secondFilter': secondFilterLabel,
                         },
                       );
                     },
@@ -92,6 +95,53 @@ class CollectionsPage extends StatelessWidget {
                       DropdownMenuItem(
                         value: 'Product Name: A to Z',
                         child: Text('Product Name: A to Z'),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(width: 24),
+                  DropdownButton<String>(
+                    value: secondFilterLabel,
+                    hint: const Text('More options'),
+                    onChanged: (value) {
+                      if (value == null) return;
+                      Navigator.pushReplacementNamed(
+                        context,
+                        '/collections',
+                        arguments: {
+                          'collectionKey': collectionKey,
+                          'filter': filterLabel,
+                          'secondFilter': value,
+                        },
+                      );
+                    },
+                    items: const [
+                      DropdownMenuItem(
+                        value: 'Option 1',
+                        child: Text('Option 1'),
+                      ),
+                      DropdownMenuItem(
+                        value: 'Option 2',
+                        child: Text('Option 2'),
+                      ),
+                      DropdownMenuItem(
+                        value: 'Option 3',
+                        child: Text('Option 3'),
+                      ),
+                      DropdownMenuItem(
+                        value: 'Option 4',
+                        child: Text('Option 4'),
+                      ),
+                      DropdownMenuItem(
+                        value: 'Option 5',
+                        child: Text('Option 5'),
+                      ),
+                      DropdownMenuItem(
+                        value: 'Option 6',
+                        child: Text('Option 6'),
+                      ),
+                      DropdownMenuItem(
+                        value: 'Option 7',
+                        child: Text('Option 7'),
                       ),
                     ],
                   ),
