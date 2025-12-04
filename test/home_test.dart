@@ -149,4 +149,22 @@ void main() {
 
     expect(find.byType(SalesPage), findsOneWidget);
   });
+
+  testWidgets('Header and hero section render correctly', (tester) async {
+    await tester.pumpWidget(_createApp());
+    await tester.pumpAndSettle();
+
+    // Header icons
+    expect(find.byIcon(Icons.search), findsOneWidget);
+    expect(find.byIcon(Icons.person_outline), findsOneWidget);
+    expect(find.byIcon(Icons.shopping_bag_outlined), findsOneWidget);
+    expect(find.byIcon(Icons.menu), findsOneWidget);
+
+    // Hero sale text
+    expect(find.text('20% Sale on Select Items!'), findsOneWidget);
+    expect(
+      find.textContaining("special offers on selected products"),
+      findsOneWidget,
+    );
+  });
 }
