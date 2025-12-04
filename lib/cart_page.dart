@@ -1,14 +1,7 @@
 import 'package:flutter/material.dart';
 import 'main.dart';
 import 'models/product_model.dart';
-
-class CartItem {
-  final Product product;
-  int quantity;
-  CartItem(this.product, this.quantity);
-}
-
-final List<CartItem> cartItems = [];
+import 'models/cart_modle.dart';
 
 void addToCart(Product p, int qty) {
   final existing = cartItems.indexWhere((c) => c.product.title == p.title);
