@@ -141,7 +141,6 @@ union_shop/
 
 ```
 
-Adjust this to match your actual structure.
 
 ---
 
@@ -157,7 +156,6 @@ Adjust this to match your actual structure.
 
 ## 7. Screenshots
 
-Place screenshots in a `screenshots/` folder and reference them here:
 
 ```markdown
 ![Home Page_1](screenshots/homePage_1.png)
