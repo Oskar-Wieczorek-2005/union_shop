@@ -86,93 +86,96 @@ class CollectionsPage extends StatelessWidget {
             const SizedBox(height: 24),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: Row(
-                children: [
-                  Text(
-                    'Filter by',
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  const SizedBox(width: 16),
-                  DropdownButton<String>(
-                    value: filterLabel,
-                    hint: const Text('Choose a filter:'),
-                    onChanged: (value) {
-                      if (value == null) return;
-                      Navigator.pushReplacementNamed(
-                        context,
-                        '/collections',
-                        arguments: {
-                          'collectionKey': collectionKey,
-                          'filter': value,
-                          'secondFilter': secondFilterLabel,
-                        },
-                      );
-                    },
-                    items: const [
-                      DropdownMenuItem(
-                        value: 'Price: Low to High',
-                        child: Text('Price: Low to High'),
-                      ),
-                      DropdownMenuItem(
-                        value: 'Product Name: A to Z',
-                        child: Text('Product Name: A to Z'),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(width: 24),
-                  DropdownButton<String>(
-                    value: secondFilterLabel,
-                    hint: const Text('Collections'),
-                    onChanged: (value) {
-                      if (value == null) return;
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    Text(
+                      'Filter by',
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    const SizedBox(width: 16),
+                    DropdownButton<String>(
+                      value: filterLabel,
+                      hint: const Text('Choose a filter:'),
+                      onChanged: (value) {
+                        if (value == null) return;
+                        Navigator.pushReplacementNamed(
+                          context,
+                          '/collections',
+                          arguments: {
+                            'collectionKey': collectionKey,
+                            'filter': value,
+                            'secondFilter': secondFilterLabel,
+                          },
+                        );
+                      },
+                      items: const [
+                        DropdownMenuItem(
+                          value: 'Price: Low to High',
+                          child: Text('Price: Low to High'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'Product Name: A to Z',
+                          child: Text('Product Name: A to Z'),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(width: 24),
+                    DropdownButton<String>(
+                      value: secondFilterLabel,
+                      hint: const Text('Collections'),
+                      onChanged: (value) {
+                        if (value == null) return;
 
-                      final mappedCollectionKey =
-                          _collectionKeyFromSecondFilter(value);
+                        final mappedCollectionKey =
+                            _collectionKeyFromSecondFilter(value);
 
-                      if (mappedCollectionKey == null) return;
+                        if (mappedCollectionKey == null) return;
 
-                      Navigator.pushReplacementNamed(
-                        context,
-                        '/collections',
-                        arguments: {
-                          'collectionKey': mappedCollectionKey,
-                          'filter': null,
-                          'secondFilter': value,
-                        },
-                      );
-                    },
-                    items: const [
-                      DropdownMenuItem(
-                        value: 'Clothing',
-                        child: Text('Clothing'),
-                      ),
-                      DropdownMenuItem(
-                        value: 'Merchandise',
-                        child: Text('Merchandise'),
-                      ),
-                      DropdownMenuItem(
-                        value: 'Halloween',
-                        child: Text('Halloween'),
-                      ),
-                      DropdownMenuItem(
-                        value: 'Signature & Essential Range',
-                        child: Text('Signature & Essential Range'),
-                      ),
-                      DropdownMenuItem(
-                        value: 'Portsmouth City Collection',
-                        child: Text('Portsmouth City Collection'),
-                      ),
-                      DropdownMenuItem(
-                        value: 'Pr*de Collection',
-                        child: Text('Pr*de Collection'),
-                      ),
-                      DropdownMenuItem(
-                        value: 'Graduation',
-                        child: Text('Graduation'),
-                      ),
-                    ],
-                  ),
-                ],
+                        Navigator.pushReplacementNamed(
+                          context,
+                          '/collections',
+                          arguments: {
+                            'collectionKey': mappedCollectionKey,
+                            'filter': null,
+                            'secondFilter': value,
+                          },
+                        );
+                      },
+                      items: const [
+                        DropdownMenuItem(
+                          value: 'Clothing',
+                          child: Text('Clothing'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'Merchandise',
+                          child: Text('Merchandise'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'Halloween',
+                          child: Text('Halloween'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'Signature & Essential Range',
+                          child: Text('Signature & Essential Range'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'Portsmouth City Collection',
+                          child: Text('Portsmouth City Collection'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'Pr*de Collection',
+                          child: Text('Pr*de Collection'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'Graduation',
+                          child: Text('Graduation'),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
             const SizedBox(height: 24),
