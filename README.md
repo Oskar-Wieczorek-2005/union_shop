@@ -132,7 +132,7 @@ union_shop/
 ├── macos/                          # macOS desktop build support
 ├── web/                            # Web build support
 ├── windows/                        # Windows desktop build support
-├── screenshots/                    # screenshots of file running
+├── screenShots/                    # screenshots of file running
 ├── README.md                       # Project documentation 
 ├── .gitignore                      # Files ignored by Git
 ├── analysis_options.yaml           # Linting and code-style rules
@@ -158,14 +158,14 @@ union_shop/
 
 
 ```markdown
-![Home Page_1](screenshots/homePage_1.png)
-![Home Page_2](screenshots/homePage_2.png)
-![Product Page](screenshots/productPage_1.png)
-![Cart Page](screenshots/cartPage_1.png)
-![Collections Page_1](screenshots/collections_1.png)
-![Collections Page_2](screenshots/collections_2.png)
-![Sales Page](screenshots/sales_1.png)
-![PrintShack Page](screenshots/printshack_1.png)
+![Home Page_1](screensSots/homePage_1.png)
+![Home Page_2](screenShots/homePage_2.png)
+![Product Page](screenShots/productPage_1.png)
+![Cart Page](screenShots/cartPage_1.png)
+![Collections Page_1](screenShots/collections_1.png)
+![Collections Page_2](screenShots/collections_2.png)
+![Sales Page](screenShots/sales_1.png)
+![PrintShack Page](screenShots/printshack_1.png)
 ```
 
 
