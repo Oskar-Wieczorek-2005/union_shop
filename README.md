@@ -36,8 +36,9 @@ This Flutter application recreates a university student shop where users can bro
 - Product catalog with images, prices, and descriptions
 - Product categories for easy navigation
 - Product Filters 
+- Print Shack Personlisation page
 - Shopping cart with add/remove/update quantity
-- Optional login and basic authentication flow
+- Optional login UI
 - Responsive UI for different mobile screen sizes
 
 
@@ -207,9 +208,8 @@ union_shop/
 ## 9. Known Issues / Limitations
 
 - No real backend or payment gateway (checkout is only a simulation).
-- Product images may be stored locally in `assets/` instead of a CDN.
-- Authentication is basic and intended for demonstration.
-- Limited error handling for network/API failures (if applicable).
+- Product imagese are stored locally in `assets/` instead of a CDN.
+- Producst are stored localy in product_modle.dart
 - No full order history or email confirmation.
 
 ---
